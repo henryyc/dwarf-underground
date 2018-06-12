@@ -152,13 +152,23 @@ class CommentBox extends Component {
   }
 
   render() {
+
     return (
-      <div ref="myRef">
+      <div ref="myRef" className="sessionBox">
+        <br />
         <h1> COMMENTS </h1>
         <input type="text" ref="commenterName" placeholder="Enter your name"></input>
         <input type="text" ref="commenterContent" placeholder="Enter your comment"></input>
-        <button onClick={this.handleClick}>Add Comment</button>
+
+        <div className="article-links">
+          <a className="article-link">
+            <i className="fa fa-plus"></i>
+            <span className="article-link-text" onClick={this.handleClick}>Add Comment</span>
+          </a>
+        </div>
+
         <div id="commentList">
+          <br />
           {this.state.comments}
         </div>
       </div>
