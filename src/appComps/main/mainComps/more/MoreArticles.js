@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Clickbait from './Clickbait';
+import Clickbait from './moreComps/Clickbait';
 
 class MoreArticles extends Component {
 

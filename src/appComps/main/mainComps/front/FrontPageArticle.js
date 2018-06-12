@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import ArticleHeader from './ArticleHeader';
-import ArticleBody from './ArticleBody';
-import ArticleFooter from './ArticleFooter';
+import ArticleHeader from './frontComps/articleHeader/ArticleHeader';
+import ArticleBody from './frontComps/articleBody/ArticleBody';
+import ArticleFooter from './frontComps/articleFooter/ArticleFooter';
 
 class FrontPageArticle extends Component {
   render() {

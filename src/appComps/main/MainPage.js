@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import FrontPageArticle from './FrontPageArticle';
-import SidebarAd from './SidebarAd';
-import MoreArticles from './MoreArticles';
-import './App.css';
+import FrontPageArticle from './mainComps/front/FrontPageArticle';
+import SidebarAd from './mainComps/side/SidebarAd';
+import MoreArticles from './mainComps/more/MoreArticles';
+import './../../App.css';
 
 class MainPage extends Component {
   render() {

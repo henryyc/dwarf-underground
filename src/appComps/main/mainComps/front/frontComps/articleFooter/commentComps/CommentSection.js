@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './App.css'
+import './../../../../../../../App.css'
 
 class Comment extends Component {
 
@@ -166,6 +166,7 @@ class CommentBox extends Component {
     this.save();
     this.load();
 
+    //toggle update permissions to prevent stack overflow
     if (!this.state.updated) {
       this.setState({
         updated: !this.state.updated,

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import CommentBox from './CommentSection'
+import CommentBox from './commentComps/CommentSection'
 
 class ArticleFooter extends Component {
 
