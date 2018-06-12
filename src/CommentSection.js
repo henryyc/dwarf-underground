@@ -20,9 +20,19 @@ class CommentBox extends Component {
 
     this.state = {
       comments: [],
+      updated: false,
     };
 
     this.load();
+
+    //comments are hidden when refreshed
+    if (window.performance) {
+      if (performance.navigation.type === 1) {
+        this.save();
+        this.load();
+        this.render();
+      }
+    }
   }
 
   //search array using component's hash value
@@ -166,9 +176,21 @@ class CommentBox extends Component {
 
   //load whenever needed
   componentDidMount() {
+    this.save();
     this.load();
   }
   componentDidUpdate() {
+    this.save();
+    this.load();
+
+    if (!this.state.updated) {
+      this.setState({
+        updated: !this.state.updated,
+      });
+    }
+  }
+  componentWillUnmount() {
+    this.save();
     this.load();
   }
 
