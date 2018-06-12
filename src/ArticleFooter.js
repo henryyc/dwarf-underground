@@ -11,18 +11,18 @@ class ArticleFooter extends Component {
     };
   }
 
-  viewComments = () => {
-    this.setState({
-      visible: !this.state.visible,
-    });
-  };
-
   render() {
     return (
       <div className="article-links">
         <a className="article-link">
           <i className="fa fa-comments-o"></i>
-          <span className="article-link-text" onClick={this.viewComments}>Comments</span>
+          <span className="article-link-text" onClick={
+            () => {
+              this.setState({
+                visible: !this.state.visible,
+              });
+            }
+            }>Comments</span>
         </a>
         <a className="article-link" href="#">
           <i className="fa fa-share"></i>

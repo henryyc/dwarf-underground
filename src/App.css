@@ -256,6 +256,16 @@ footer h6 {
   display: inline-block;
 }
 
+.textBox {
+  padding-top: .5em;
+  padding-left: .5em;
+  height: 5em;
+}
+
+.commentLabels {
+  padding-left: .25em;
+}
+
 .singleComment {
   border: black;
   border-radius: 10px;

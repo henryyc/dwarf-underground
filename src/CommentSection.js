@@ -6,8 +6,8 @@ class Comment extends Component {
   render() {
     return (
       <div className="singleComment" key={this.props.key}>
-        <p>Name: {this.props.name}, {this.props.relDate} ago</p>
-        <p>Comment: {this.props.comment}</p>
+        <p className="commentLabels">Name: {this.props.name}, {this.props.relDate} ago</p>
+        <p className="commentLabels">Comment: {this.props.comment}</p>
       </div>
     )
   }
@@ -24,15 +24,6 @@ class CommentBox extends Component {
     };
 
     this.load();
-
-    //comments are hidden when refreshed
-    if (window.performance) {
-      if (performance.navigation.type === 1) {
-        this.save();
-        this.load();
-        this.render();
-      }
-    }
   }
 
   //search array using component's hash value
@@ -166,14 +157,6 @@ class CommentBox extends Component {
     }
   }
 
-  //on click, add a new comment if fields are not empty
-  handleClick = () => {
-    if (this.refs.commenterName.value != "" && this.refs.commenterContent.value != "") {
-      const today = new Date();
-      this.addComment(this.refs.commenterName.value, today, this.refs.commenterContent.value);
-    }
-  };
-
   //load whenever needed
   componentDidMount() {
     this.save();
@@ -189,10 +172,6 @@ class CommentBox extends Component {
       });
     }
   }
-  componentWillUnmount() {
-    this.save();
-    this.load();
-  }
 
   render() {
     return this.props.visible ? (
@@ -200,12 +179,29 @@ class CommentBox extends Component {
         <br />
         <h1> COMMENTS </h1>
         <input type="text" ref="commenterName" placeholder="Enter your name"></input>
-        <input type="text" ref="commenterContent" placeholder="Enter your comment"></input>
+        <textarea type="text" ref="commenterContent" className="textBox" placeholder="Enter your comment"></textarea>
 
         <div className="article-links">
           <a className="article-link">
             <i className="fa fa-plus"></i>
-            <span className="article-link-text" onClick={this.handleClick}>Add Comment</span>
+            <span className="article-link-text" onClick={
+              //add new comment if fields are not empty
+              () => {
+                const tempName = this.refs.commenterName.value;
+                const tempContent = this.refs.commenterContent.value;
+
+                if (tempName != "" && tempContent != "") {
+
+                  //manually reset fields
+                  this.refs.commenterName.value = "";
+                  this.refs.commenterContent.value = "";
+                  this.addComment(tempName, new Date(), tempContent);
+                }
+                else {
+                  alert('Please fill in all fields!');
+                }
+              }
+            }>Add Comment</span>
           </a>
         </div>
 
