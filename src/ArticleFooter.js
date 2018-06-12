@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import Comment from './CommentBox';
-import CommentBox from './CommentBox'
+import CommentBox from './CommentSection'
 
 class ArticleFooter extends Component {
 
@@ -14,45 +13,18 @@ class ArticleFooter extends Component {
     };
   }
 
-  loadFromStorageOnly() {
-
-    const commentJSON = localStorage.getItem('userComments');
-    const commentArray = JSON.parse(commentJSON);
-
-    const oldComments = [];
-    for (let i = 0; i < commentArray.length; i++) {
-      oldComments.push(
-        <Comment
-          name={commentArray[i].name}
-          date={commentArray[i].date}
-          comment={commentArray[i].content}
-          key={commentArray[i].hash}
-        />
-      );
-    }
-
-    return oldComments;
-  }
-
-  viewComments() {
-    console.log(this.state.sessionBox)
-    const oldComments = this.loadFromStorageOnly();
-    const allComments = oldComments.concat(this.state.sessionBox.comments ? this.state.sessionBox.comments : []);
-    // this.state.sessionBox.setState({
-    //   comments: allComments,
-    // });
-
+  viewComments = () => {
     this.setState({
       visible: !this.state.visible,
     });
-  }
+  };
 
   render() {
     return (
       <div className="article-links">
         <a className="article-link">
           <i className="fa fa-comments-o"></i>
-          <span className="article-link-text" onClick={() => this.viewComments()}>Comments</span>
+          <span className="article-link-text" onClick={this.viewComments}>Comments</span>
         </a>
         <a className="article-link" href="#">
           <i className="fa fa-share"></i>

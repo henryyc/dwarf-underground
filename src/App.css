@@ -255,3 +255,9 @@ footer h6 {
   padding-right: 1.5em;
   display: inline-block;
 }
+
+.singleComment {
+  border: black;
+  border-radius: 10px;
+  background-color: lightgray;
+}
