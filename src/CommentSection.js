@@ -25,9 +25,20 @@ class CommentBox extends Component {
     this.load();
   }
 
-  load() {
-    const currComments = this.state.comments;
+  //search array using component's hash value
+  customIndexOf(arr, value) {
+    let index = -1;
+    for (let i = 0; i < arr.length; i++) {
+      if (arr[i].props.hash === value.props.hash) {
+        index = i;
+        i = arr.length;
+      }
+    }
+    return index;
+  }
 
+  //load in comments from local storage
+  load() {
     const commentJSON = localStorage.getItem('userComments');
     const commentArray = JSON.parse(commentJSON);
 
@@ -45,13 +56,21 @@ class CommentBox extends Component {
         );
       }
 
-      const allComments = currComments.concat(oldComments);
+      //union comments from localstorage with currently loaded comments
+      const allComments = oldComments.slice(0);
+      for (let i = 0; i < allComments; i++) {
+        if (this.customIndexOf(allComments, this.state.comments[i]) == -1) {
+          allComments.unshift(this.state.comments[i])
+        }
+      }
+
       if (this.refs.myRef) {
         this.state.comments = allComments;
       }
     }
   }
 
+  //store current comments in local storage
   save() {
     const commentData = [];
 
@@ -113,6 +132,7 @@ class CommentBox extends Component {
     return hash;
   }
 
+  //add new comment to state
   addComment(name, today, content) {
     const currComments = [...this.state.comments];
 
@@ -136,6 +156,7 @@ class CommentBox extends Component {
     }
   }
 
+  //on click, add a new comment if fields are not empty
   handleClick = () => {
     if (this.refs.commenterName.value != "" && this.refs.commenterContent.value != "") {
       const today = new Date();
@@ -143,17 +164,16 @@ class CommentBox extends Component {
     }
   };
 
+  //load whenever needed
+  componentDidMount() {
+    this.load();
+  }
   componentDidUpdate() {
     this.load();
   }
 
-  componentDidMount() {
-    this.load();
-  }
-
   render() {
-
-    return (
+    return this.props.visible ? (
       <div ref="myRef" className="sessionBox">
         <br />
         <h1> COMMENTS </h1>
@@ -172,7 +192,7 @@ class CommentBox extends Component {
           {this.state.comments}
         </div>
       </div>
-    );
+    ) : null;
   }
 }
 

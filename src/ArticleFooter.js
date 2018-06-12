@@ -6,10 +6,8 @@ class ArticleFooter extends Component {
   constructor(props) {
     super(props);
 
-    const dontChange = <CommentBox />
     this.state = {
       visible: false,
-      sessionBox: dontChange,
     };
   }
 
@@ -30,7 +28,7 @@ class ArticleFooter extends Component {
           <i className="fa fa-share"></i>
           <span className="article-link-text">Share Post</span>
         </a>
-        {this.state.visible ? this.state.sessionBox : null}
+        {this.state.visible ? <CommentBox visible={true} /> : <CommentBox visible={false} />}
       </div>
     );
   }
